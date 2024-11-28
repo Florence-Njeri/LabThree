@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG CMakeFiles/file_copier.dir/sources/main.c.o CMakeFiles/file_copier.dir/sources/functions/functions.c.o CMakeFiles/file_copier.dir/sources/functions/hidden_functions/hidden_functions.c.o -o file_copier 
