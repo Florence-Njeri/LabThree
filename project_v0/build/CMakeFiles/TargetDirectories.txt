@@ -1,0 +1,4 @@
+/home/group-2-c/LabThree/project_v0/build/CMakeFiles/file_copier.dir
+/home/group-2-c/LabThree/project_v0/build/CMakeFiles/database.dir
+/home/group-2-c/LabThree/project_v0/build/CMakeFiles/edit_cache.dir
+/home/group-2-c/LabThree/project_v0/build/CMakeFiles/rebuild_cache.dir

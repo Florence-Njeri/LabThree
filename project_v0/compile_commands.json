@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/group-2-c/LabThree/project_v0/build",
+  "command": "/usr/bin/cc  -I/home/group-2-c/LabThree/project_v0/sources/functions -O3 -DNDEBUG -std=c11 -Wall -Wextra -Werror -o CMakeFiles/file_copier.dir/sources/main.c.o -c /home/group-2-c/LabThree/project_v0/sources/main.c",
+  "file": "/home/group-2-c/LabThree/project_v0/sources/main.c",
+  "output": "CMakeFiles/file_copier.dir/sources/main.c.o"
+},
+{
+  "directory": "/home/group-2-c/LabThree/project_v0/build",
+  "command": "/usr/bin/cc  -I/home/group-2-c/LabThree/project_v0/sources/functions -O3 -DNDEBUG -std=c11 -Wall -Wextra -Werror -o CMakeFiles/file_copier.dir/sources/functions/functions.c.o -c /home/group-2-c/LabThree/project_v0/sources/functions/functions.c",
+  "file": "/home/group-2-c/LabThree/project_v0/sources/functions/functions.c",
+  "output": "CMakeFiles/file_copier.dir/sources/functions/functions.c.o"
+},
+{
+  "directory": "/home/group-2-c/LabThree/project_v0/build",
+  "command": "/usr/bin/cc  -I/home/group-2-c/LabThree/project_v0/sources/functions -O3 -DNDEBUG -std=c11 -Wall -Wextra -Werror -o CMakeFiles/file_copier.dir/sources/functions/hidden_functions/hidden_functions.c.o -c /home/group-2-c/LabThree/project_v0/sources/functions/hidden_functions/hidden_functions.c",
+  "file": "/home/group-2-c/LabThree/project_v0/sources/functions/hidden_functions/hidden_functions.c",
+  "output": "CMakeFiles/file_copier.dir/sources/functions/hidden_functions/hidden_functions.c.o"
+}
+]
