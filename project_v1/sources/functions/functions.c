@@ -47,7 +47,8 @@ int parse_options(int            argc,
 }
 
 int secure_hash_file(const char * in, const char * out) {
-    int error = access(out, F_OK);
+    int error = open(out, O_RDONLY | O_NOFOLLOW);
+    
     if (error) {
         FILE * fdtmp = fopen(out, "w");
         if (fdtmp == NULL) {
@@ -57,9 +58,29 @@ int secure_hash_file(const char * in, const char * out) {
         fclose(fdtmp);
     }
 
-    error = access(in, R_OK);
+    error = open(in, O_RDONLY | O_NOFOLLOW);
+     if (error == -1) {
+        perror("Error opening input file");
+        return EXIT_FAILURE;
+    }
+
+    // Check if input file is a regular file
+    if (fstat(error, &file_info) == -1 || !S_ISREG(file_info.st_mode)) {
+        fprintf(stderr, "Error: Input file is not a regular file or could not be stat-ed.\n");
+        close(error);
+        return EXIT_FAILURE;
+    }
+
     if (!error) {
-        int error = access(out, W_OK);
+        int error = open(out, O_WRONLY | O_CREAT | O_EXCL);
+        
+        // Once you open a file, use fstat() on the file descriptor to ensure it is a regular file and not a symlink.
+       if (fstat(error, &file_info) == -1 || S_ISLNK(file_info.st_mode)) {
+            fprintf(stderr, "Error: File is a symlink, operation aborted.\n");
+            close(error);
+            return EXIT_FAILURE;
+        }
+
         if (!error) {
             unsigned char hash[32];
             (void) compute_confirmation(in, hash);

@@ -48,15 +48,35 @@ int parse_options(int            argc,
 
 int secure_copy_file(const char * in, const char * out) {
     int error = 0;
-    error     = access(in, R_OK);
+    struct stat file_info;
+    error = open(in, O_RDONLY | O_NOFOLLOW);
+
+    if (error == -1) {
+        perror("Error opening input file");
+        return EXIT_FAILURE;
+    }
+
+    // Check if input file is a regular file
+    if (fstat(error, &file_info) == -1 || !S_ISREG(file_info.st_mode)) {
+        fprintf(stderr, "Error: Input file is not a regular file or could not be stat-ed.\n");
+        close(error);
+        return EXIT_FAILURE;
+    }
     if (!error) {
-        error = access(out, W_OK);
+        error = open(out, O_WRONLY | O_CREAT | O_EXCL);
+        // Once you open a file, use fstat() on the file descriptor to ensure it is a regular file and not a symlink.
+       if (fstat(error, &file_info) == -1 || S_ISLNK(file_info.st_mode)) {
+            fprintf(stderr, "Error: File is a symlink, operation aborted.\n");
+            close(error);
+            return EXIT_FAILURE;
+        }
         if (!error) {
             error = wait_confirmation(in, out);
             copy_file(in, out);
-        } else {
+        }else {
             fprintf(stderr, "File %s cannot be written.\n", out);
         }
+        
     } else {
         fprintf(stderr, "File %s cannot be read.\n", in);
     }
